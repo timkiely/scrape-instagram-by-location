@@ -1,0 +1,44 @@
+---
+title: "Instagram Metadata Scraper"
+output: github_document
+---
+
+Unlike other Instagram scraping projects around, the aim of this package is very narrow: 
+* search for Instagram/Facebook/Foursquare place ID's
+* Retrieve the metadata about the posts from that location
+
+This package is not interested in downloading the media associated with IG posts.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+The first function searches for locaiton ID's using whatever text string you're interested in. Let's search for posts around Williamsburg:
+
+```{r, message=FALSE, warning=FALSE}
+source("search-for-location-ids.R")
+
+possible_locations <- search_for_location_ids(location = "Williamsburg, New York")
+
+possible_locations
+
+```
+
+The `pk` collumn contains the relevant location ID's we need to hit instagram's Graphql api. The correct location appears to be `242698464`. We can feed that to the subsequent function `get_posts_from_location` in order to retrieve metadata about the first batch of posts.
+
+```{r}
+
+source("scrape-posts-from-location.R")
+
+posts <- get_posts_from_location(location_id = 242698464, after = 0)
+
+posts
+
+```
+
+You can input the `end_cursor` value returned by `get_posts_from_location` to a subsequent call as the `after` parameter. That will ensure the next call will return the next batch of posts. 
+
+
+
+
