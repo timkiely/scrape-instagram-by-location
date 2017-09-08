@@ -19,7 +19,8 @@ get_posts_from_location <- function(location_id = NULL, after = 0) {
   
   # issue the request and check the response status
   req <- GET(query_url)
-  if(status_code(req)!=200) stop("The server returned an error. Something went wrong or maybe you hit a call limit")
+  if(status_code(req)!=200) stop("The server returned an error. Something went wrong or maybe you hit a call limit. 
+                                 \nThe error message reads:",content(req, "text", encoding = "UTF-8"))
   
   
   # parse the result to json text
