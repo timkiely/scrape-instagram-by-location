@@ -4,6 +4,10 @@ Instagram Metadata Scraper
 ### OPEN QUESTIONS:
 
 -   what is the edge\_location\_to\_media "count" response? When scrapping an entire location page, the end count (where has\_next\_page = FALSE) is usually around half of the full count. Is the scrape failing? Or does the count reflect something else (private accounts?)
+-   How to obtain an exhaustive list of location ID's?
+-   What are the api call limits? How many calls can you make in a row? What's the reset time? Do IP's ever get blocked? (running network speed test to address this)
+-   how to integrate proxy use with httr? 1) Obtain list of proxies 2) build fault tolerance
+-   Parallelize network requests? Maybe launch multiple EC2's?
 
 Instagram Scraper:
 ==================
@@ -28,10 +32,10 @@ possible_locations
     ##  1       215631076                   Williamsburg, Brooklyn
     ##  2 322718158073985                       Apple Williamsburg
     ##  3       239812273 Retro Fitness of Brooklyn - Williamsburg
-    ##  4       215154722              East Williamsburg, Brooklyn
-    ##  5       212950988                       Brooklyn, New York
-    ##  6 272829696534567                   Williamsburg, Brooklyn
-    ##  7               0              Willamsburg, Brooklyn 11206
+    ##  4               0              Willamsburg, Brooklyn 11206
+    ##  5       215154722              East Williamsburg, Brooklyn
+    ##  6       212950988                       Brooklyn, New York
+    ##  7 272829696534567                   Williamsburg, Brooklyn
     ##  8       272829900            Williamsburg Park Brooklyn NY
     ##  9         2489983                   Williamsburg, Virginia
     ## 10        28382340                               16 Handles
