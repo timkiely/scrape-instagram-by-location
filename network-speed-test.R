@@ -40,7 +40,7 @@ for(i in 1:10){
   if(status_code(req)!=200){
     text <- content(req, "text", encoding = "UTF-8")
     minutes <- 60 * sample(1:60,1)
-    cat("\n sleeping for",minutes,"minutes...")
+    cat("\n sleeping for",minutes/60,"minutes...\n")
     Sys.sleep(minutes)
     }
   out_frame <- tbl_df(data.frame(trial, time, run_time[3], status, minutes, text, stringsAsFactors = F))
