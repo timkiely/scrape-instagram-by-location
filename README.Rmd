@@ -14,6 +14,8 @@ output: github_document
 
 # Instagram Scraper:
 
+This package focuses on metadata analysis of Instagram posts with an emphasis on geo-location. 
+
 Unlike other Instagram scraping projects around, the aim of this package is very narrow: 
 * search for Instagram/Facebook/Foursquare place ID's
 * Retrieve the metadata about the posts from that location

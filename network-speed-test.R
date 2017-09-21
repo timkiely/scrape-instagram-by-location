@@ -13,7 +13,7 @@ library(tidyverse)
 
 
 logger <- data.frame()
-for(i in 1:10){
+for(i in 1:101){
   cat("\ntrial",i)
   out_frame <- data.frame()
   
@@ -39,9 +39,13 @@ for(i in 1:10){
   
   if(status_code(req)!=200){
     text <- content(req, "text", encoding = "UTF-8")
-    minutes <- 60 * sample(1:60,1)
+    minutes <- 60 * sample(4:6,1)
+    out_frame <- tbl_df(data.frame(trial, time, run_time[3], status, minutes, text, stringsAsFactors = F))
+    logger <- tbl_df(bind_rows(logger,out_frame))
+    write_csv(logger,"logger.csv", append = T)
     cat("\n sleeping for",minutes/60,"minutes...\n")
     Sys.sleep(minutes)
+    next
     }
   out_frame <- tbl_df(data.frame(trial, time, run_time[3], status, minutes, text, stringsAsFactors = F))
   logger <- tbl_df(bind_rows(logger,out_frame))
