@@ -1,10 +1,12 @@
 Instagram Metadata Scraper
 ================
 
-OPEN QUESTIONS
-==============
+### OPEN QUESTIONS:
 
 -   what is the edge\_location\_to\_media "count" response? When scrapping an entire location page, the end count (where has\_next\_page = FALSE) is usually around half of the full count. Is the scrape failing? Or does the count reflect something else (private accounts?)
+
+Instagram Scraper:
+==================
 
 Unlike other Instagram scraping projects around, the aim of this package is very narrow: \* search for Instagram/Facebook/Foursquare place ID's \* Retrieve the metadata about the posts from that location
 

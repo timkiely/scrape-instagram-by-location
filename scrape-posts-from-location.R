@@ -71,5 +71,10 @@ get_posts_from_location <- function(location_id = NULL, after = 0) {
 }
 
 # with profiling, the GET requests take up 90%+ of the time, so the remaining funtion is farily optimized
-posts <- get_posts_from_location(location_id = 242698464)
+# posts <- get_posts_from_location(location_id = 215631076)
+
+
+
+
+
 

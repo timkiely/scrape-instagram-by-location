@@ -4,11 +4,12 @@ output: github_document
 ---
 
 
-# OPEN QUESTIONS
+### OPEN QUESTIONS:
 * what is the edge_location_to_media "count" response? When scrapping an entire location page, the end count (where has_next_page = FALSE) is usually around half of the full count. Is the scrape failing? Or does the count reflect something else (private accounts?)
 
 
 
+# Instagram Scraper:
 
 Unlike other Instagram scraping projects around, the aim of this package is very narrow: 
 * search for Instagram/Facebook/Foursquare place ID's
