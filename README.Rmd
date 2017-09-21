@@ -3,11 +3,18 @@ title: "Instagram Metadata Scraper"
 output: github_document
 ---
 
+
+# OPEN QUESTIONS
+* what is the edge_location_to_media "count" response? When scrapping an entire location page, the end count (where has_next_page = FALSE) is usually around half of the full count. Is the scrape failing? Or does the count reflect something else (private accounts?)
+
+
+
+
 Unlike other Instagram scraping projects around, the aim of this package is very narrow: 
 * search for Instagram/Facebook/Foursquare place ID's
 * Retrieve the metadata about the posts from that location
 
-This package is not interested in downloading the media associated with IG posts.
+This package is not interested in downloading the media (photos/videos) associated with IG posts.
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -19,7 +26,7 @@ The first function searches for locaiton ID's using whatever text string you're 
 ```{r, message=FALSE, warning=FALSE}
 source("search-for-location-ids.R")
 
-possible_locations <- search_for_location_ids(location = "Williamsburg, New York")
+possible_locations <- search_for_location_ids(location = "Williamsburg, Brooklyn")
 
 possible_locations
 
