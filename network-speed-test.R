@@ -13,7 +13,7 @@ library(tidyverse)
 
 
 logger <- data.frame()
-for(i in 1:1000000){
+for(i in 1:10){
   cat("\ntrial",i)
   out_frame <- data.frame()
   
@@ -23,7 +23,7 @@ for(i in 1:1000000){
   
   base_url <- "https://www.instagram.com/graphql/query/?query_id=17881432870018455&id=%s&first=%s&after=0"
   location_id <- 242698464
-  query_url <- sprintf(base_url,location_id,sample(50:100,1),after) # 70 is the max per request. choose random # over 50 to mix up the urls
+  query_url <- sprintf(base_url,location_id,sample(50:100,1)) # 70 is the max per request. choose random # over 50 to mix up the urls
   
   run_time <- system.time({
   req <- GET(query_url)
