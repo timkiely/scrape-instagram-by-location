@@ -5,7 +5,7 @@ output: github_document
 
 
 ### OPEN QUESTIONS:
-* what is the edge_location_to_media "count" response? When scrapping an entire location page, the end count (where has_next_page = FALSE) is usually around half of the full count. Is the scrape failing? Or does the count reflect something else (private accounts?)
+
 * How to obtain an exhaustive list of location ID's? 
 * What are the api call limits? How many calls can you make in a row? What's the reset time? Do IP's ever get blocked? (running  network speed test to address this)
 * how to integrate proxy use with httr? 1) Obtain list of proxies 2) build fault tolerance

@@ -32,11 +32,13 @@ url <- "https://www.instagram.com/graphql/query/?query_id=17881432870018455&id=2
 r <- GET(url)
 (cont <- content(r))
 
+(r <- GET("https://www.instagram.com/web/search/p"))
+content(r)
+
+"https://api.instagram.com/v1/locations/search?lat=48.858844&lng=2.294351&access_token=ACCESS-TOKEN"
 
 
-
-
-
+'https://www.instagram.com/query/'
 
 
 

@@ -3,7 +3,6 @@ Instagram Metadata Scraper
 
 ### OPEN QUESTIONS:
 
--   what is the edge\_location\_to\_media "count" response? When scrapping an entire location page, the end count (where has\_next\_page = FALSE) is usually around half of the full count. Is the scrape failing? Or does the count reflect something else (private accounts?)
 -   How to obtain an exhaustive list of location ID's?
 -   What are the api call limits? How many calls can you make in a row? What's the reset time? Do IP's ever get blocked? (running network speed test to address this)
 -   how to integrate proxy use with httr? 1) Obtain list of proxies 2) build fault tolerance
@@ -11,6 +10,8 @@ Instagram Metadata Scraper
 
 Instagram Scraper:
 ==================
+
+This package focuses on metadata analysis of Instagram posts with an emphasis on geo-location.
 
 Unlike other Instagram scraping projects around, the aim of this package is very narrow: \* search for Instagram/Facebook/Foursquare place ID's \* Retrieve the metadata about the posts from that location
 
@@ -33,9 +34,9 @@ possible_locations
     ##  2 322718158073985                       Apple Williamsburg
     ##  3       239812273 Retro Fitness of Brooklyn - Williamsburg
     ##  4               0              Willamsburg, Brooklyn 11206
-    ##  5       215154722              East Williamsburg, Brooklyn
-    ##  6       212950988                       Brooklyn, New York
-    ##  7 272829696534567                   Williamsburg, Brooklyn
+    ##  5 272829696534567                   Williamsburg, Brooklyn
+    ##  6       215154722              East Williamsburg, Brooklyn
+    ##  7       212950988                       Brooklyn, New York
     ##  8       272829900            Williamsburg Park Brooklyn NY
     ##  9         2489983                   Williamsburg, Virginia
     ## 10        28382340                               16 Handles
@@ -63,7 +64,7 @@ posts
     ## [1] 6298
     ## 
     ## $response_data
-    ## # A tibble: 63 x 10
+    ## # A tibble: 62 x 10
     ##    timestamps                 ids      owner  shortcodes `comment count`
     ##         <int>               <chr>      <chr>       <chr>           <int>
     ##  1 1505608895 1605486240253385215 2013360237 BZH1TqyFJn_               0
@@ -76,7 +77,7 @@ posts
     ##  8 1505150974 1601644921746825195   25663333 BY6L5IJBx_r               1
     ##  9 1505149809 1601635141284020811 1605349367 BY6JqzYBEJL               1
     ## 10 1505148706 1601625892198483649 1007647573 BY6HkNfjwbB               0
-    ## # ... with 53 more rows, and 5 more variables: display_url <chr>,
+    ## # ... with 52 more rows, and 5 more variables: display_url <chr>,
     ## #   is_video <lgl>, thumbnail_src <chr>, captions <chr>, date_time <dttm>
 
 You can input the `end_cursor` value returned by `get_posts_from_location` to a subsequent call as the `after` parameter. That will ensure the next call will return the next batch of posts.
