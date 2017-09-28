@@ -1,4 +1,6 @@
 
+# Query the location API with any character string. Returns location_ids, which can be used to querry metadata
+
 suppressPackageStartupMessages({
   library(httr)
   library(tidyverse)

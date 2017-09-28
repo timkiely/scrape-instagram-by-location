@@ -1,4 +1,6 @@
 
+# URL locations. Need to clean this up
+
 BASE_URL = 'https://www.instagram.com/'
 LOGIN_URL = paste0(BASE_URL,'accounts/login/ajax/')
 LOGOUT_URL = paste0(BASE_URL,'accounts/logout/')

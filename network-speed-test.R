@@ -1,6 +1,8 @@
 
 
 # network test
+# testing how fast we can hit IG's network before rate limiting
+
 if(!"httr"%in%installed.packages()){
   install.packages("httr")
 }

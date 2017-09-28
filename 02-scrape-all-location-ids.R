@@ -1,35 +1,46 @@
+# using the function which locates location IDs, we loop over
+# a list of possible places (from OSM and OpenAddress)
+# and store the resulting location_ids
+
+
 rm(list=ls()[!ls()%in%c("osm_points","osm_places","open_addresses")])
 
 
 
 # User Inputs -------------------------------------------------------------
+
 # how long to sleep once rate limit hit (in seconds):
 time_to_sleep <- 60*3
+
 # how large should stage_frame get before you post-process and write to disk?
 stage_frame_cache_limit <- 1000
 
 
+
+# require -----------------------------------------------------------------
 library(tidyverse)
 library(sf)
 source("search-for-location-ids.R")
 
 
 # create list of places and addresses -------------------------------------
-# OSM place data from: https://mapzen.com/data/metro-extracts/metro/new-york_new-york/
+
+# OSM place data from: https://s3.amazonaws.com/metro-extracts.mapzen.com/new-york_new-york.osm2pgsql-shapefiles.zip
+# openaddress data from: http://results.openaddresses.io/?runs=all#runs
+# pre-processed list of addresses uploaded to: https://s3-us-west-2.amazonaws.com/project.data.dl/instagram/all_search_terms.rds
+if(!exists("all_search_terms")){
+  all_search_terms <- read_rds('data/all_search_terms.rds')
+}
+
 if(!exists("osm_points")){
   osm_points <- read_sf("data/new-york_new-york.osm2pgsql-geojson/new-york_new-york_osm_point.geojson") %>% select(osm_id,name,geometry)
   osm_places <- osm_points %>% filter(!is.na(name))
 }
 
-# openaddress data from: http://results.openaddresses.io/?runs=all#runs
-if(!exists("open_addresses")){
-  open_addresses <- read_csv("data/city_of_new_york.csv")
-}
 
 # function filters the results for only in Tri State area ---------------------------
-osm_boundary <- osm_places %>% select(geometry) %>% count() %>% st_convex_hull()
-
 # takes a data.frame with lat and lng coordinates and filters them by a convex hull boundary
+osm_boundary <- osm_places %>% select(geometry) %>% count() %>% st_convex_hull()
 filter_location_by_boundary <- function(locations, boundary){
   if(is.null(locations$lat) | is.null(locations$lng)) stop("locations data.frame must contain lng, lat columns")
   if(!"sf"%in%class(boundary)) stop("boundary argument must be a convex hull from sf::st_convex_hull")

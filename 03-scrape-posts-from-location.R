@@ -1,5 +1,6 @@
 
-
+# for a given location_id, scrape all the metadata for that location and a given page ID
+# you can use the resultant next_page param to get the next page
 
 suppressPackageStartupMessages({
   library(httr) # making GET requests
