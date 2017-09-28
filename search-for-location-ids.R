@@ -11,15 +11,18 @@ search_for_location_ids <- function(location = NULL){
   query_url <- sprintf(base_url,location_clean)
   req <- GET(query_url)
   
-  if(status_code(req)!=200) stop("server returned an error")
+  response_status <- status_code(req)
+  if(response_status!=200) stop("server returned an error")
   txt <- content(req, "text", encoding = "UTF-8")
   response <- jsonlite::fromJSON(txt)
   response_df <- response$places$place$location
   
-  #include error handling here?
-  #if(is.null(response_df)) stop("Address has no content")
-  tbl_df(response_df)
+  
+  list('data' = tbl_df(response_df), 'status' = response_status)
 }
+
+# for testing:
+# search_for_location_ids <- function(locations = NULL) stop("server returned an error")
 
 # Test:  
 # ( srch <- search_for_location_ids(location = "Charging Bull") )
