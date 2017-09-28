@@ -2,6 +2,13 @@ rm(list=ls()[!ls()%in%c("osm_points","osm_places","open_addresses")])
 
 
 
+# User Inputs -------------------------------------------------------------
+# how long to sleep once rate limit hit (in seconds):
+time_to_sleep <- 60*3
+# how large should stage_frame get before you post-process and write to disk?
+stage_frame_cache_limit <- 1000
+
+
 library(tidyverse)
 library(sf)
 source("search-for-location-ids.R")
@@ -19,10 +26,6 @@ if(!exists("open_addresses")){
   open_addresses <- read_csv("data/city_of_new_york.csv")
 }
 
-
-
-
-
 # function filters the results for only in Tri State area ---------------------------
 osm_boundary <- osm_places %>% select(geometry) %>% count() %>% st_convex_hull()
 
@@ -35,9 +38,6 @@ filter_location_by_boundary <- function(locations, boundary){
     st_intersection(boundary,locations) %>% tbl_df() %>% select(-geometry)
   )
 }
-# filter_location_by_boundary(locations = bind_rows(stage_frame), boundary = osm_boundary)
-
-
 
 # function refines the staging data.frame for output ----------------------
 refine_stage_frame <- function(stage_frame, boundary = NULL){
@@ -46,10 +46,8 @@ refine_stage_frame <- function(stage_frame, boundary = NULL){
   stage_frame
 }
 
-
 # main search function ----------------------------------------------------
 safely_search_for_location_ids <- safely(search_for_location_ids)
-
 
 # sleep system with progress
 sleep_with_progress <- function(sleep_time){
@@ -61,21 +59,10 @@ sleep_with_progress <- function(sleep_time){
   })
 }
 
-
 # LOOP  -------------------------------------------
-
-# how long to sleep once rate limit hit (in seconds):
-time_to_sleep <- 60*3
-
-# how large should stage_frame get before you post-process and write to disk?
-stage_frame_cache_limit <- 1000
-i<-1
-
 stage_frame <- data.frame()
 logger <- data.frame()
 for(i in 1:length(osm_places$name)){
-  #tryCatch({
-  
   
   # set up and console output:
   cat("\ntrial",i,"of",length(osm_places$name))
@@ -204,13 +191,6 @@ for(i in 1:length(osm_places$name)){
   
   
   gc(verbose = FALSE)
-  
-  
-  # }, error=function(e) {
-  #   cat("\nThere was a global error:", as.character(e))
-  #   sleep_with_progress(time_to_sleep) 
-  # }
-  # ) #end of tryCatch
   
   
 }

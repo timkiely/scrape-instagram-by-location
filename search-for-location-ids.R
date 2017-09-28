@@ -20,9 +20,3 @@ search_for_location_ids <- function(location = NULL){
   
   list('data' = tbl_df(response_df), 'status' = response_status)
 }
-
-# for testing:
-# search_for_location_ids <- function(locations = NULL) stop("server returned an error")
-
-# Test:  
-# ( srch <- search_for_location_ids(location = "Charging Bull") )
